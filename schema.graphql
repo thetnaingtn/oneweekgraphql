@@ -1,25 +1,39 @@
-type Query{
-    cart(id: ID!): Cart
+type Query {
+  cart(id: ID!): Cart
 }
 
-type Cart{
-    id: ID!
-    items:[CartItem!]!
-    subTotal: Money!
-    totalItems: Int!
+type Mutation {
+  addItem(input: AddToCartInput!): Cart
+}
+
+type Cart {
+  id: ID!
+  items: [CartItem!]!
+  subTotal: Money!
+  totalItems: Int!
 }
 
 type CartItem {
-    id: ID!
-    name: String!
-    description: String
-    quantity: Int!
-    unitTotal: Money!
-    lineTotal: Money!
-    image: String
+  id: ID!
+  name: String!
+  description: String
+  quantity: Int!
+  unitTotal: Money!
+  lineTotal: Money!
+  image: String
 }
 
-type Money{
-    formatted: String!
-    amount: Int!
+type Money {
+  formatted: String!
+  amount: Int!
+}
+
+input AddToCartInput {
+  id: ID!
+  cartId: ID!
+  name: String!
+  description: String
+  quantity: Int = 1
+  price: Int!
+  image: String
 }

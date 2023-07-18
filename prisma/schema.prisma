@@ -23,6 +23,7 @@ model CartItem {
   price       Int
   cart        Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
   cartId      String
+  image       String?
 
   @@id([id, cartId])
 }
