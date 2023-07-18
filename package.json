@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "codegen": "graphql-codegen --config codegen.yml",
-    "db:generate": "prisma generate"
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio"
   },
   "dependencies": {
     "@graphql-yoga/node": "^2.3.0",
@@ -17,6 +19,7 @@
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "autoprefixer": "10.4.14",
+    "currency-formatter": "^1.5.9",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
     "graphql": "^16.7.1",
@@ -31,6 +34,7 @@
     "@graphql-codegen/cli": "4.0.1",
     "@graphql-codegen/typescript": "4.0.1",
     "@graphql-codegen/typescript-resolvers": "4.0.1",
+    "@types/currency-formatter": "^1.5.1",
     "prisma": "3.11.0"
   }
 }

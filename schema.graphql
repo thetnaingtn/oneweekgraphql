@@ -4,5 +4,22 @@ type Query{
 
 type Cart{
     id: ID!
+    items:[CartItem!]!
+    subTotal: Money!
     totalItems: Int!
+}
+
+type CartItem {
+    id: ID!
+    name: String!
+    description: String
+    quantity: Int!
+    unitTotal: Money!
+    lineTotal: Money!
+    image: String
+}
+
+type Money{
+    formatted: String!
+    amount: Int!
 }

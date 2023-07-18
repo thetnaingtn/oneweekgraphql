@@ -3,6 +3,10 @@ schema: "schema.graphql"
 generates:
   types.ts:
     config:
+      mapperTypeSuffix: Model
+      mappers:
+        Cart: "@prisma/client#Cart"
+        CartItem: "@prisma/client#CartItem"
       contextType: ./pages/api/index#GraphQLContext
     plugins:
       - "typescript"
