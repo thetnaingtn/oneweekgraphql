@@ -56,6 +56,15 @@ const resolvers: Resolvers = {
 
       return cart;
     },
+    async deleteItem(_, { input }, { prisma }) {
+      let { cartId } = await prisma.cartItem.delete({
+        where: {
+          id_cartId: { id: input.id, cartId: input.cartId },
+        },
+      });
+
+      return findOrCreateCart(prisma, cartId);
+    },
   },
   CartItem: {
     unitTotal(item) {

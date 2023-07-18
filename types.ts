@@ -47,6 +47,11 @@ export type CartItem = {
   unitTotal: Money;
 };
 
+export type DeleteToCartInput = {
+  cartId: Scalars['ID']['input'];
+  id: Scalars['ID']['input'];
+};
+
 export type Money = {
   __typename?: 'Money';
   amount: Scalars['Int']['output'];
@@ -56,11 +61,17 @@ export type Money = {
 export type Mutation = {
   __typename?: 'Mutation';
   addItem?: Maybe<Cart>;
+  deleteItem?: Maybe<Cart>;
 };
 
 
 export type MutationAddItemArgs = {
   input: AddToCartInput;
+};
+
+
+export type MutationDeleteItemArgs = {
+  input: DeleteToCartInput;
 };
 
 export type Query = {
@@ -148,6 +159,7 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Cart: ResolverTypeWrapper<CartModel>;
   CartItem: ResolverTypeWrapper<CartItemModel>;
+  DeleteToCartInput: DeleteToCartInput;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Money: ResolverTypeWrapper<Money>;
@@ -162,6 +174,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
   Cart: CartModel;
   CartItem: CartItemModel;
+  DeleteToCartInput: DeleteToCartInput;
   ID: Scalars['ID']['output'];
   Int: Scalars['Int']['output'];
   Money: Money;
@@ -197,6 +210,7 @@ export type MoneyResolvers<ContextType = GraphQLContext, ParentType extends Reso
 
 export type MutationResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   addItem?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<MutationAddItemArgs, 'input'>>;
+  deleteItem?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<MutationDeleteItemArgs, 'input'>>;
 };
 
 export type QueryResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
