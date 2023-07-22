@@ -47,6 +47,11 @@ export type CartItem = {
   unitTotal: Money;
 };
 
+export type DecreaseCartItem = {
+  cartId: Scalars['ID']['input'];
+  id: Scalars['ID']['input'];
+};
+
 export type DeleteFromCartInput = {
   cartId: Scalars['ID']['input'];
   id: Scalars['ID']['input'];
@@ -66,6 +71,7 @@ export type Money = {
 export type Mutation = {
   __typename?: 'Mutation';
   addItem?: Maybe<Cart>;
+  decreaseItem?: Maybe<Cart>;
   deleteItem?: Maybe<Cart>;
   increaseItem?: Maybe<Cart>;
 };
@@ -73,6 +79,11 @@ export type Mutation = {
 
 export type MutationAddItemArgs = {
   input: AddToCartInput;
+};
+
+
+export type MutationDecreaseItemArgs = {
+  input: DecreaseCartItem;
 };
 
 
@@ -170,6 +181,7 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Cart: ResolverTypeWrapper<CartModel>;
   CartItem: ResolverTypeWrapper<CartItemModel>;
+  DecreaseCartItem: DecreaseCartItem;
   DeleteFromCartInput: DeleteFromCartInput;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   IncreaseCartItem: IncreaseCartItem;
@@ -186,6 +198,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
   Cart: CartModel;
   CartItem: CartItemModel;
+  DecreaseCartItem: DecreaseCartItem;
   DeleteFromCartInput: DeleteFromCartInput;
   ID: Scalars['ID']['output'];
   IncreaseCartItem: IncreaseCartItem;
@@ -223,6 +236,7 @@ export type MoneyResolvers<ContextType = GraphQLContext, ParentType extends Reso
 
 export type MutationResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   addItem?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<MutationAddItemArgs, 'input'>>;
+  decreaseItem?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<MutationDecreaseItemArgs, 'input'>>;
   deleteItem?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<MutationDeleteItemArgs, 'input'>>;
   increaseItem?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<MutationIncreaseItemArgs, 'input'>>;
 };

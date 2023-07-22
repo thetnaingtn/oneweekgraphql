@@ -85,6 +85,23 @@ const resolvers: Resolvers = {
 
       return findOrCreateCart(prisma, cartId);
     },
+    async decreaseItem(_, { input }, { prisma }) {
+      let { cartId } = await prisma.cartItem.update({
+        data: {
+          quantity: {
+            decrement: 1,
+          },
+        },
+        where: {
+          id_cartId: { id: input.id, cartId: input.cartId },
+        },
+        select: {
+          cartId: true,
+        },
+      });
+
+      return await findOrCreateCart(prisma, cartId);
+    },
   },
   CartItem: {
     unitTotal(item) {
