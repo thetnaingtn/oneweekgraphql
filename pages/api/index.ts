@@ -7,10 +7,13 @@ import currencyFormatter from 'currency-formatter';
 
 import { Resolvers } from '../../types';
 import prisma from '../../lib/prisma';
-import { findOrCreateCart } from '../../lib/util';
+import {
+  findOrCreateCart,
+  validateCartItems,
+  currencyCode,
+} from '../../lib/cart';
 import { stripe } from '@/lib/stripe';
-
-const currencyCode = 'USD';
+import { products } from '@/lib/product';
 
 export type GraphQLContext = {
   prisma: PrismaClient;
@@ -125,20 +128,7 @@ const resolvers: Resolvers = {
         throw new GraphQLYogaError('Cart is empty');
       }
 
-      const line_items = cartItems.map((item) => {
-        return {
-          quantity: item.quantity,
-          price_data: {
-            currency: currencyCode,
-            unit_amount: item.price,
-            product_data: {
-              name: item.name,
-              description: item.description || undefined,
-              images: item.image ? [item.image] : [],
-            },
-          },
-        };
-      });
+      const line_items = validateCartItems(products, cartItems);
 
       const session = await stripe.checkout.sessions.create({
         success_url: `http://localhost:3000/thankyou?session_id={CHECKOUT_SESSION_ID}`,
