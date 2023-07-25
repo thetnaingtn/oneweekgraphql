@@ -1,3 +1,4 @@
+import { useGetCartQuery } from '@/types';
 import { getCookie, setCookie } from 'cookies-next';
 import { IncomingMessage, ServerResponse } from 'http';
 import { NextApiRequestCookies } from 'next/dist/server/api-utils';
@@ -20,4 +21,11 @@ export function getCartId({
   }
 
   return String(cartId);
+}
+
+export function useCart() {
+  const cartId = String(getCookie('cartId'));
+  const { data } = useGetCartQuery({ variables: { id: cartId as any } });
+
+  return data?.cart;
 }

@@ -1,5 +1,4 @@
 import { getCartId } from '@/lib/cart.client';
-import useClient from '@/lib/client';
 import { useGetCartQuery } from '@/types';
 import { GetServerSideProps } from 'next';
 
@@ -8,10 +7,8 @@ interface CartProps {
 }
 
 export default function Cart({ cartId }: CartProps) {
-  const client = useClient();
   const { data } = useGetCartQuery({
     variables: { id: cartId as any },
-    client,
   });
 
   return (
